@@ -53,6 +53,43 @@
             z-index: 1;
         }
 
+        .navigation {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            z-index: 15;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        }
+
         .blood-drops {
             position: fixed;
             top: 0;
@@ -402,12 +439,27 @@
             .enter-button {
                 font-size: 2rem;
             }
+
+            .navigation {
+                gap: 15px;
+                padding: 10px 20px;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="intro-screen" id="introScreen">
         <div class="enter-button">Click To Enter</div>
+    </div>
+
+    <div class="navigation">
+        <a href="https://example.com/" class="nav-link active">Main Page</a>
+        <a href="https://example.com/wall-of-clowns" class="nav-link">Wall Of Clowns</a>
     </div>
 
     <video class="background-video" autoplay muted loop>
