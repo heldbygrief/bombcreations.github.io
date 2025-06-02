@@ -1,0 +1,731 @@
+<!DOCTYPE html> <!-- if you skid this kill yourself hoe -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Of Clowns</title>
+    <link rel="icon" type="image/png" href="https://r2.guns.lol/093eddce-9b63-4eb3-bd2c-afe119291182.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wall Of Clowns">
+    <meta property="og:description" content="Culprit's Wall Of Clowns">
+    <meta property="og:image" content="https://i.imgur.com/lJit481.jpeg">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="564 | Wall Of Clowns">
+    <meta name="theme-color" content="#8B0000">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wall Of Clowns">
+    <meta name="twitter:description" content="Culprit's Wall Of Clowns">
+    <meta name="twitter:image" content="https://i.imgur.com/lJit481.jpeg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            cursor: url('https://r2.guns.lol/e95afafd-1f55-4f10-8669-848b1223abd9.webp'), auto;
+            background: #000;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            z-index: 15;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 1);
+        }
+
+        .blood-drops {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .blood-drop {
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, #8B0000, #FF0000, #8B0000);
+            border-radius: 0 0 50% 50%;
+            opacity: 0.8;
+        }
+
+        .blood-drop:nth-child(1) {
+            left: 10%;
+            height: 40px;
+            animation: bloodFall 4s linear infinite;
+        }
+
+        .blood-drop:nth-child(2) {
+            left: 25%;
+            height: 60px;
+            animation: bloodFall 5s linear infinite 1s;
+        }
+
+        .blood-drop:nth-child(3) {
+            left: 40%;
+            height: 35px;
+            animation: bloodFall 3.5s linear infinite 2s;
+        }
+
+        .blood-drop:nth-child(4) {
+            left: 55%;
+            height: 50px;
+            animation: bloodFall 4.5s linear infinite 0.5s;
+        }
+
+        .blood-drop:nth-child(5) {
+            left: 70%;
+            height: 45px;
+            animation: bloodFall 3.8s linear infinite 1.5s;
+        }
+
+        .blood-drop:nth-child(6) {
+            left: 85%;
+            height: 55px;
+            animation: bloodFall 4.2s linear infinite 2.5s;
+        }
+
+        .blood-drop:nth-child(7) {
+            left: 15%;
+            height: 38px;
+            animation: bloodFall 3.7s linear infinite 3s;
+        }
+
+        .blood-drop:nth-child(8) {
+            left: 60%;
+            height: 42px;
+            animation: bloodFall 4.1s linear infinite 1.8s;
+        }
+
+        .blood-drop:nth-child(9) {
+            left: 30%;
+            height: 48px;
+            animation: bloodFall 3.9s linear infinite 2.2s;
+        }
+
+        .blood-drop:nth-child(10) {
+            left: 75%;
+            height: 52px;
+            animation: bloodFall 4.3s linear infinite 0.8s;
+        }
+
+        @keyframes bloodFall {
+            0% {
+                top: -60px;
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+
+        .particles-canvas, .cursor-particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .cursor-particles-canvas {
+            z-index: 3;
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            padding: 120px 20px 40px;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff0080);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowGlow 3s ease-in-out infinite, rainbowMove 8s ease-in-out infinite;
+        }
+
+        @keyframes rainbowGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff8000);
+            }
+            16% {
+                filter: drop-shadow(0 0 20px #ffff00) drop-shadow(0 0 40px #80ff00);
+            }
+            33% {
+                filter: drop-shadow(0 0 20px #00ff00) drop-shadow(0 0 40px #00ff80);
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #0080ff);
+            }
+            66% {
+                filter: drop-shadow(0 0 20px #0000ff) drop-shadow(0 0 40px #8000ff);
+            }
+            83% {
+                filter: drop-shadow(0 0 20px #ff0080) drop-shadow(0 0 40px #ff0000);
+            }
+        }
+
+        @keyframes rainbowMove {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .clowns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .clown-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 30px rgba(255, 255, 255, 0.1),
+                inset 0 0 30px rgba(255, 255, 255, 0.05);
+        }
+
+        .clown-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-10px);
+            box-shadow: 
+                0 0 50px rgba(255, 255, 255, 0.2),
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .clown-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .clown-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #ff0000;
+            text-shadow: 
+                0 0 10px #ff0000,
+                0 0 20px #ff0000,
+                0 0 30px #ff0000,
+                0 0 40px #ff0000;
+            animation: redGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes redGlow {
+            from {
+                text-shadow: 
+                    0 0 10px #ff0000,
+                    0 0 20px #ff0000,
+                    0 0 30px #ff0000,
+                    0 0 40px #ff0000;
+            }
+            to {
+                text-shadow: 
+                    0 0 15px #ff0000,
+                    0 0 25px #ff0000,
+                    0 0 35px #ff0000,
+                    0 0 50px #ff0000,
+                    0 0 60px #ff0000;
+            }
+        }
+
+        .clown-subtitle {
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ffd93d;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+        }
+
+        .clown-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e5e7eb;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            cursor: pointer;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .intro-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .enter-button {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 
+                0 0 30px rgba(255, 255, 255, 0.8), 
+                0 0 60px rgba(255, 255, 255, 0.6),
+                0 0 90px rgba(255, 255, 255, 0.4);
+            letter-spacing: 3px;
+            animation: enterGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes enterGlow {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 0.8), 
+                    0 0 60px rgba(255, 255, 255, 0.6),
+                    0 0 90px rgba(255, 255, 255, 0.4);
+            }
+            50% { 
+                transform: scale(1.05);
+                text-shadow: 
+                    0 0 40px rgba(255, 255, 255, 1), 
+                    0 0 80px rgba(255, 255, 255, 0.8),
+                    0 0 120px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .clowns-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .navigation {
+                gap: 15px;
+                padding: 10px 20px;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+
+            .enter-button {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-screen" id="introScreen">
+        <div class="enter-button">Click To Enter</div>
+    </div>
+
+    <div class="navigation">
+        <a href="https://example.com/" class="nav-link">Main Page</a>
+        <a href="https://example.com/wall-of-clowns" class="nav-link active">Wall Of Clowns</a>
+    </div>
+
+    <video class="background-video" autoplay muted loop>
+        <source src="https://r2.guns.lol/849b6436-37f5-42b0-8bbb-9598a7ca47d3.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="blood-drops">
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+        <div class="blood-drop"></div>
+    </div>
+
+    <canvas class="particles-canvas" id="particlesCanvas"></canvas>
+    <canvas class="cursor-particles-canvas" id="cursorParticlesCanvas"></canvas>
+
+    <audio id="backgroundAudio" loop>
+        <source src="https://r2.guns.lol/292555d3-9193-4bdb-b44d-114227ad31f0.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="main-content">
+        <h1 class="page-title">WALL OF CLOWNS</h1>
+        
+        <div class="clowns-grid">
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 1" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 2" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 3" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 4" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 5" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 6" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 7" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 8" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+
+    <div class="clown-card">
+        <img src="/placeholder.svg" alt="Clown 9" class="clown-image">
+        <div class="clown-name">Name</div>
+        <div class="clown-subtitle">Title</div>
+        <div class="clown-description">
+            Will be adding these soon.
+        </div>
+    </div>
+</div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            particleCount: 150,
+            cursorParticleCount: 3,
+            cursorParticleLifetime: 80,
+            titleTexts: ["Wall Of Clowns", "Clown Gallery", "Hall of Shame"],
+        };
+
+        let particles = [];
+        let cursorParticles = [];
+        let mousePos = { x: 0, y: 0 };
+        let lastMouseMove = 0;
+
+        let currentTitleIndex = 0;
+        let titleIndex = 0;
+        let titleDisplayText = "";
+        let titleTyping = true;
+
+        const audio = document.getElementById('backgroundAudio');
+        const introScreen = document.getElementById('introScreen');
+        const mainContent = document.querySelector('.main-content');
+
+        function titleTypewriter() {
+            const currentTitleText = CONFIG.titleTexts[currentTitleIndex];
+            
+            if (titleTyping) {
+                if (titleIndex < currentTitleText.length) {
+                    titleDisplayText += currentTitleText.charAt(titleIndex);
+                    document.title = titleDisplayText;
+                    titleIndex++;
+                    setTimeout(titleTypewriter, 150);
+                } else {
+                    setTimeout(() => {
+                        titleTyping = false;
+                        titleTypewriter();
+                    }, 3000);
+                }
+            } else {
+                if (titleDisplayText.length > 0) {
+                    titleDisplayText = titleDisplayText.slice(0, -1);
+                    document.title = titleDisplayText;
+                    setTimeout(titleTypewriter, 100);
+                } else {
+                    currentTitleIndex = (currentTitleIndex + 1) % CONFIG.titleTexts.length;
+                    titleIndex = 0;
+                    titleTyping = true;
+                    setTimeout(titleTypewriter, 1000);
+                }
+            }
+        }
+
+        titleTypewriter();
+
+        introScreen.addEventListener('click', () => {
+            introScreen.classList.add('hidden');
+            
+            audio.volume = 1.0;
+            audio.play().catch(e => {
+                console.log('Audio play failed:', e);
+            });
+        });
+
+        const particlesCanvas = document.getElementById('particlesCanvas');
+        const cursorParticlesCanvas = document.getElementById('cursorParticlesCanvas');
+        const particlesCtx = particlesCanvas.getContext('2d');
+        const cursorParticlesCtx = cursorParticlesCanvas.getContext('2d');
+
+        function resizeCanvases() {
+            particlesCanvas.width = window.innerWidth;
+            particlesCanvas.height = window.innerHeight;
+            cursorParticlesCanvas.width = window.innerWidth;
+            cursorParticlesCanvas.height = window.innerHeight;
+        }
+
+        resizeCanvases();
+        window.addEventListener('resize', resizeCanvases);
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < CONFIG.particleCount; i++) {
+                particles.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight - window.innerHeight,
+                    vx: (Math.random() - 0.5) * 0.8,
+                    vy: Math.random() * 2 + 1,
+                    size: Math.random() * 4 + 2,
+                    opacity: Math.random() * 0.8 + 0.2,
+                    color: 'white',
+                });
+            }
+        }
+
+        function animateParticles() {
+            particles.forEach(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
+                if (particle.y > window.innerHeight + 10) {
+                    particle.x = Math.random() * window.innerWidth;
+                    particle.y = -10;
+                    particle.vx = (Math.random() - 0.5) * 0.8;
+                    particle.vy = Math.random() * 2 + 1;
+                }
+
+                if (particle.x > window.innerWidth + 10) {
+                    particle.x = -10;
+                } else if (particle.x < -10) {
+                    particle.x = window.innerWidth + 10;
+                }
+            });
+        }
+
+        function drawParticles() {
+            particlesCtx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
+
+            particles.forEach(particle => {
+                particlesCtx.globalAlpha = particle.opacity;
+                particlesCtx.fillStyle = particle.color;
+                particlesCtx.beginPath();
+                particlesCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                particlesCtx.fill();
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            mousePos.x = e.clientX;
+            mousePos.y = e.clientY;
+
+            if (now - lastMouseMove > 30) {
+                for (let i = 0; i < CONFIG.cursorParticleCount; i++) {
+                    cursorParticles.push({
+                        x: e.clientX + (Math.random() - 0.5) * 5,
+                        y: e.clientY + (Math.random() - 0.5) * 5,
+                        vx: (Math.random() - 0.5) * 1,
+                        vy: Math.random() * 3 + 2,
+                        life: CONFIG.cursorParticleLifetime,
+                        maxLife: CONFIG.cursorParticleLifetime,
+                        size: Math.random() * 3 + 2,
+                        color: `hsl(${Math.random() * 20}, 80%, ${40 + Math.random() * 20}%)`,
+                    });
+                }
+                lastMouseMove = now;
+            }
+
+            if (cursorParticles.length > 40) {
+                cursorParticles = cursorParticles.slice(-40);
+            }
+        });
+
+        function animateCursorParticles() {
+            cursorParticles = cursorParticles.filter(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.life -= 1;
+                particle.vy += 0.1;
+                particle.vx *= 0.98;
+                return particle.life > 0;
+            });
+        }
+
+        function drawCursorParticles() {
+            cursorParticlesCtx.clearRect(0, 0, cursorParticlesCanvas.width, cursorParticlesCanvas.height);
+
+            cursorParticles.forEach(particle => {
+                const opacity = particle.life / particle.maxLife;
+                cursorParticlesCtx.globalAlpha = opacity * 0.9;
+                cursorParticlesCtx.fillStyle = particle.color;
+                cursorParticlesCtx.shadowBlur = 8;
+                cursorParticlesCtx.shadowColor = particle.color;
+                cursorParticlesCtx.beginPath();
+                cursorParticlesCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                cursorParticlesCtx.fill();
+                cursorParticlesCtx.shadowBlur = 0;
+            });
+        }
+
+        function animate() {
+            animateParticles();
+            animateCursorParticles();
+            drawParticles();
+            drawCursorParticles();  
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>
