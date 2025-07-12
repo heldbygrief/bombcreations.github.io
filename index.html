@@ -1,67 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Instagram Follower Checker</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Instagram Follower Checker Bookmarklet</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #111; color: #eee; padding: 20px; }
-    input, button { padding: 10px; margin-top: 10px; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 5px 0; }
-    .result { margin-top: 30px; }
+    body { font-family: sans-serif; background: #f5f5f5; color: #222; padding: 40px; text-align: center; }
+    a.bookmarklet { display: inline-block; padding: 12px 18px; background: #3897f0; color: #fff; border-radius: 4px; text-decoration: none; font-size: 16px; }
   </style>
 </head>
 <body>
   <h1>Instagram Follower Checker</h1>
-  <input type="text" id="session" placeholder="Paste your Instagram sessionid" style="width: 400px;" />
-  <br />
-  <button onclick="checkFollowers()">Check</button>
-  <div id="output" class="result"></div>
-
-  <script>
-    async function checkFollowers() {
-      const sessionid = document.getElementById('session').value.trim();
-      const headers = {
-        "cookie": `sessionid=${sessionid}`,
-        "x-ig-app-id": "936619743392459", // Instagram web app ID
-      };
-
-      const me = await fetch("https://www.instagram.com/api/v1/accounts/current_user/", {
-        headers
-      }).then(res => res.json()).catch(() => null);
-
-      if (!me || !me.user || !me.user.pk) {
-        document.getElementById("output").innerHTML = "<b>Invalid session ID or Instagram blocked request.</b>";
-        return;
-      }
-
-      const userId = me.user.pk;
-      let followers = [], followings = [];
-
-      async function getUsers(type) {
-        const out = [];
-        let next = null;
-        do {
-          const url = `https://www.instagram.com/api/v1/friendships/${userId}/${type}/?count=50&max_id=${next ?? ""}`;
-          const res = await fetch(url, { headers }).then(r => r.json());
-          out.push(...res.users.map(u => ({ username: u.username, full_name: u.full_name })));
-          next = res.next_max_id;
-        } while (next && out.length < 500); // limit to 500 for demo
-        return out;
-      }
-
-      followers = await getUsers("followers");
-      followings = await getUsers("following");
-
-      const dontFollowMeBack = followings.filter(f => !followers.some(x => x.username === f.username));
-      const iDontFollowBack = followers.filter(f => !followings.some(x => x.username === f.username));
-
-      document.getElementById("output").innerHTML = `
-        <h3>Don't Follow Me Back (${dontFollowMeBack.length})</h3>
-        <ul>${dontFollowMeBack.map(u => `<li>@${u.username} (${u.full_name})</li>`).join("")}</ul>
-        <h3>I Don't Follow Back (${iDontFollowBack.length})</h3>
-        <ul>${iDontFollowBack.map(u => `<li>@${u.username} (${u.full_name})</li>`).join("")}</ul>
-      `;
-    }
-  </script>
+  <p>Drag this to your bookmarks bar:</p>
+  <a class="bookmarklet" href='javascript:(async function(){if(!window.location.hostname.includes("instagram.com")){alert("Go to instagram.com to run this.");return;}if(document.getElementById("follow-checker-panel"))return;const panel=document.createElement("div");panel.id="follow-checker-panel";panel.style="position:fixed;top:20px;right:20px;width:300px;background:#111;color:#fff;padding:15px;border-radius:10px;z-index:9999;font-family:sans-serif;max-height:80vh;overflow-y:auto;";panel.innerHTML="<h3>Loading followers…<\/h3>";document.body.appendChild(panel);try{const resMe=await fetch("https://www.instagram.com/api/v1/accounts/current_user/");const meJson=await resMe.json();if(!meJson.user){panel.innerHTML="<b>Not logged in or blocked<\/b>";return;}const userId=meJson.user.pk;async function f(qh,k){let a=null,h=true,o=[];while(h&&o.length<500){const u="https://www.instagram.com/graphql/query/?query_hash="+qh+"&variables="+encodeURIComponent(JSON.stringify({id:userId,include_reel:true,fetch_mutual:true,first:50,after:a}));const r=await fetch(u);const j=await r.json();const ed=j.data.user[k].edges;o.push(...ed.map(({node:c})=>({username:c.username,full_name:c.full_name})));h=j.data.user[k].page_info.has_next_page;a=j.data.user[k].page_info.end_cursor;}return o;}const g=await f("c76146de99bb02f6415203be841dd25a","edge_followed_by"),s=await f("d04b0a864b4b54837c0d870b0e77e076","edge_follow");const nfb=s.filter(x=>!g.find(y=>y.username===x.username)), idb=g.filter(x=>!s.find(y=>y.username===x.username));panel.innerHTML=`<h3>Instagram Follower Check<\/h3><p><b>Don't Follow Me Back:</b> ${nfb.length}<\/p><ul style="font-size:12px;">${nfb.map(u=>`<li>@${u.username} (${u.full_name})<\/li>`).join("")}<\/ul><p><b>I Don't Follow Back:</b> ${idb.length}<\/p><ul style="font-size:12px;">${idb.map(u=>`<li>@${u.username} (${u.full_name})<\/li>`).join("")}<\/ul><button onclick="document.getElementById('follow-checker-panel').remove()" style="margin-top:10px;padding:6px 12px;background:#3897f0;color:#fff;border:none;border-radius:4px;cursor:pointer;">Close<\/button>`;}catch(e){panel.innerHTML=`<b>Error:</b> ${e.message}`;console.error(e);}})();'>Instagram Follower Checker</a>
 </body>
 </html>
