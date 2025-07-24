@@ -3,23 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grow a Garden</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Google Classroom Clone</title>
+    <!-- Assuming Tailwind CSS is linked or compiled here -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Classroom logo for the browser tab -->
+    <link rel="icon" href="/placeholder.svg?height=16&width=16" type="image/svg+xml">
 </head>
-<body>
-    <div class="game-container">
-        <h1>My Little Garden</h1>
-        <div class="game-area">
-            <canvas id="gameCanvas" width="600" height="400"></canvas>
-            <div class="ui-panel">
-                <div class="tools">
-                    <button id="plantTool" class="tool-button active" data-tool="plant">Plant Seed</button>
-                    <button id="harvestTool" class="tool-button" data-tool="harvest">Harvest</button>
-                </div>
-                <div id="messageBox" class="message-box">Welcome to your garden! Select a tool.</div>
+<body class="min-h-screen bg-gray-100">
+    <header class="bg-white shadow-sm py-3 px-6 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <!-- Menu Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-6 h-6 text-gray-600 cursor-pointer">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+            <!-- Secret button disguised as Google Classroom text -->
+            <a href="games.html" class="text-xl font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                Google Classroom
+            </a>
+        </div>
+        <div class="flex items-center gap-4">
+            <!-- Plus Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-6 h-6 text-gray-600 cursor-pointer">
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+            </svg>
+            <!-- Layout Grid Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid w-6 h-6 text-gray-600 cursor-pointer">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                <line x1="3" x2="21" y1="9" y2="9"></line>
+                <line x1="3" x2="21" y1="15" y2="15"></line>
+                <line x1="9" x2="9" y1="3" y2="21"></line>
+                <line x1="15" x2="15" y1="3" y2="21"></line>
+            </svg>
+            <!-- User Avatar (default profile picture) -->
+            <div class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full border-2 border-gray-300">
+                <img class="aspect-square h-full w-full" alt="User A" src="/public/images/default-pfp.png">
+                <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">A</span>
             </div>
         </div>
-    </div>
-    <script src="script.js"></script>
+    </header>
+
+    <main class="p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Class Card: Calculus -->
+            <div class="w-full max-w-sm rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="relative h-24 bg-pink-500 flex items-end p-4">
+                    <!-- Placeholder for class background image -->
+                    <img src="/placeholder.svg?height=96&width=300" alt="Class background" class="absolute inset-0 opacity-20 object-cover w-full h-full" />
+                    <div class="relative z-10 flex justify-between items-center w-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Calculus</h2>
+                            <p class="text-sm text-white opacity-90">1</p>
+                            <p class="text-sm text-white opacity-90">Katherine Kim</p>
+                        </div>
+                        <!-- Teacher avatar -->
+                        <div class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white">
+                            <img class="aspect-square h-full w-full" alt="Katherine Kim" src="/placeholder.svg?height=64&width=64">
+                            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">KK</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div>
+                        <p class="text-muted-foreground">Due Monday</p>
+                        <p class="font-medium">11:59 PM - Applications of Diff...</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 p-4 border-t text-muted-foreground">
+                    <!-- UserRound Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round w-5 h-5">
+                        <circle cx="12" cy="8" r="5"></circle>
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    </svg>
+                    <!-- Folder Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5">
+                        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Class Card: Art History -->
+            <div class="w-full max-w-sm rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="relative h-24 bg-gray-500 flex items-end p-4">
+                    <!-- Placeholder for class background image -->
+                    <img src="/placeholder.svg?height=96&width=300" alt="Class background" class="absolute inset-0 opacity-20 object-cover w-full h-full" />
+                    <div class="relative z-10 flex justify-between items-center w-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Art History</h2>
+                            <p class="text-sm text-white opacity-90">1</p>
+                            <p class="text-sm text-white opacity-90">Robert Duffy</p>
+                        </div>
+                        <!-- Teacher avatar -->
+                        <div class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white">
+                            <img class="aspect-square h-full w-full" alt="Robert Duffy" src="/placeholder.svg?height=64&width=64">
+                            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">RD</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div>
+                        <p class="text-muted-foreground">Due today</p>
+                        <p class="font-medium">Spring showcase check in</p>
+                    </div>
+                    <div>
+                        <p class="text-muted-foreground">Due tomorrow</p>
+                        <p class="font-medium">Exit ticket</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 p-4 border-t text-muted-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round w-5 h-5">
+                        <circle cx="12" cy="8" r="5"></circle>
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5">
+                        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Class Card: Biology 2 -->
+            <div class="w-full max-w-sm rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="relative h-24 bg-purple-500 flex items-end p-4">
+                    <!-- Placeholder for class background image -->
+                    <img src="/placeholder.svg?height=96&width=300" alt="Class background" class="absolute inset-0 opacity-20 object-cover w-full h-full" />
+                    <div class="relative z-10 flex justify-between items-center w-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Biology 2</h2>
+                            <p class="text-sm text-white opacity-90">2</p>
+                            <p class="text-sm text-white opacity-90">Rolanda Johnson</p>
+                        </div>
+                        <!-- Teacher avatar -->
+                        <div class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white">
+                            <img class="aspect-square h-full w-full" alt="Rolanda Johnson" src="/placeholder.svg?height=64&width=64">
+                            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">RJ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div>
+                        <p class="text-muted-foreground">Due Friday</p>
+                        <p class="font-medium">Anatomy of a cell</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 p-4 border-t text-muted-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round w-5 h-5">
+                        <circle cx="12" cy="8" r="5"></circle>
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5">
+                        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Class Card: Computer Science -->
+            <div class="w-full max-w-sm rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="relative h-24 bg-blue-500 flex items-end p-4">
+                    <!-- Placeholder for class background image -->
+                    <img src="/placeholder.svg?height=96&width=300" alt="Class background" class="absolute inset-0 opacity-20 object-cover w-full h-full" />
+                    <div class="relative z-10 flex justify-between items-center w-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Computer Science</h2>
+                            <p class="text-sm text-white opacity-90">2</p>
+                            <p class="text-sm text-white opacity-90">Miguel Lopez</p>
+                        </div>
+                        <!-- Teacher avatar -->
+                        <div class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white">
+                            <img class="aspect-square h-full w-full" alt="Miguel Lopez" src="/placeholder.svg?height=64&width=64">
+                            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">ML</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div>
+                        <p class="text-muted-foreground">Due Friday</p>
+                        <p class="font-medium">Algorithms knowledge check</p>
+                    </div>
+                    <div>
+                        <p class="text-muted-foreground">Due Tuesday</p>
+                        <p class="font-medium">3:30 PM - Intro to Algorithms Homework</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 p-4 border-t text-muted-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round w-5 h-5">
+                        <circle cx="12" cy="8" r="5"></circle>
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5">
+                        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Class Card: AP Spanish 1 -->
+            <div class="w-full max-w-sm rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="relative h-24 bg-indigo-500 flex items-end p-4">
+                    <!-- Placeholder for class background image -->
+                    <img src="/placeholder.svg?height=96&width=300" alt="Class background" class="absolute inset-0 opacity-20 object-cover w-full h-full" />
+                    <div class="relative z-10 flex justify-between items-center w-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">AP Spanish 1</h2>
+                            <p class="text-sm text-white opacity-90">3</p>
+                            <p class="text-sm text-white opacity-90">Molly Sager</p>
+                        </div>
+                        <!-- Teacher avatar -->
+                        <div class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white">
+                            <img class="aspect-square h-full w-full" alt="Molly Sager" src="/placeholder.svg?height=64&width=64">
+                            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">MS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div>
+                        <p class="text-muted-foreground">Due Monday</p>
+                        <p class="font-medium">Week 9 vocab quiz</p>
+                    </div>
+                    <div>
+                        <p class="text-muted-foreground">Due Monday</p>
+                        <p class="font-medium">Week 9 vocab worksheet</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 p-4 border-t text-muted-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round w-5 h-5">
+                        <circle cx="12" cy="8" r="5"></circle>
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5">
+                        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Class Card: Geology -->
+            <div class="w-full max-w-sm rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="relative h-24 bg-green-500 flex items-end p-4">
+                    <!-- Placeholder for class background image -->
+                    <img src="/placeholder.svg?height=96&width=300" alt="Class background" class="absolute inset-0 opacity-20 object-cover w-full h-full" />
+                    <div class="relative z-10 flex justify-between items-center w-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Geology</h2>
+                            <p class="text-sm text-white opacity-90">1</p>
+                            <p class="text-sm text-white opacity-90">Rolanda Johnson</p>
+                        </div>
+                        <!-- Teacher avatar -->
+                        <div class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white">
+                            <img class="aspect-square h-full w-full" alt="Rolanda Johnson" src="/placeholder.svg?height=64&width=64">
+                            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">RJ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div>
+                        <p class="text-muted-foreground">Due Friday</p>
+                        <p class="font-medium">9:00 PM - Geologic theories ho...</p>
+                    </div>
+                    <div>
+                        <p class="text-muted-foreground">Due Monday</p>
+                        <p class="font-medium">Geologic theories take home quiz</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 p-4 border-t text-muted-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round w-5 h-5">
+                        <circle cx="12" cy="8" r="5"></circle>
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5">
+                        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Class Card: Physics -->
+            <div class="w-full max-w-sm rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="relative h-24 bg-orange-500 flex items-end p-4">
+                    <!-- Placeholder for class background image -->
+                    <img src="/placeholder.svg?height=96&width=300" alt="Class background" class="absolute inset-0 opacity-20 object-cover w-full h-full" />
+                    <div class="relative z-10 flex justify-between items-center w-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Physics</h2>
+                            <p class="text-sm text-white opacity-90">1</p>
+                            <p class="text-sm text-white opacity-90">Dr. Alex Chen</p>
+                        </div>
+                        <!-- Teacher avatar -->
+                        <div class="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white">
+                            <img class="aspect-square h-full w-full" alt="Dr. Alex Chen" src="/placeholder.svg?height=64&width=64">
+                            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted sr-only">AC</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3 text-sm">
+                    <div>
+                        <p class="text-muted-foreground">Due Wednesday</p>
+                        <p class="font-medium">Lab Report: Kinematics</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 p-4 border-t text-muted-foreground">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round w-5 h-5">
+                        <circle cx="12" cy="8" r="5"></circle>
+                        <path d="M20 21a8 8 0 0 0-16 0"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5">
+                        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16Z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
