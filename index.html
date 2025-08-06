@@ -7,7 +7,6 @@
   <link rel="icon" type="image/png" href="Media/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-      /* Global Reset & Base Styles */
       * {
           margin: 0;
           padding: 0;
@@ -16,8 +15,8 @@
 
       body {
           font-family: 'Inter', sans-serif;
-          background: #0a0a0a; /* Deep dark background */
-          color: #e0e0e0; /* Light gray text */
+          background: #0a0a0a;
+          color: #e0e0e0;
           min-height: 100vh;
           overflow-x: hidden;
           position: relative;
@@ -25,7 +24,6 @@
           flex-direction: column;
       }
 
-      /* Subtle background texture */
       body::before {
           content: '';
           position: fixed;
@@ -50,7 +48,6 @@
           flex-direction: column;
       }
 
-      /* Header */
       header {
           padding: 20px 0;
           position: relative;
@@ -58,15 +55,15 @@
           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
           box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
           margin-bottom: 30px;
-          display: grid; /* Use grid for better centering */
-          grid-template-columns: 1fr auto 1fr; /* Left nav, centered logo, right empty space */
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
           align-items: center;
       }
 
       .header-left-nav {
           display: flex;
           gap: 15px;
-          justify-self: start; /* Align to the start of the grid column */
+          justify-self: start;
       }
 
       .nav-item {
@@ -100,14 +97,14 @@
       }
 
       .nav-item.search-toggle-button.active svg {
-          transform: rotate(90deg); /* Rotate search icon when active */
+          transform: rotate(90deg);
       }
 
       .logo-container {
           display: flex;
           align-items: center;
           gap: 10px;
-          justify-self: center; /* Center in the middle grid column */
+          justify-self: center;
       }
 
       .logo-container img {
@@ -122,11 +119,10 @@
           font-size: 2.5rem;
           font-weight: 700;
           color: #ffffff;
-          text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Increased glow */
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
           letter-spacing: -1px;
       }
 
-      /* Dynamic Search and Filter Panel */
       .search-filter-panel {
           background: #1a1a1a;
           border: 1px solid #333333;
@@ -137,14 +133,14 @@
           display: flex;
           flex-direction: column;
           gap: 20px;
-          max-height: 0; /* Initial state for animation */
+          max-height: 0;
           opacity: 0;
           overflow: hidden;
           transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
       }
 
       .search-filter-panel.active {
-          max-height: 200px; /* Adjust as needed to fit content */
+          max-height: 200px;
           opacity: 1;
       }
 
@@ -155,7 +151,7 @@
       }
 
       .search-filter-panel .search-input {
-          flex-grow: 1; /* Take up available space */
+          flex-grow: 1;
           padding: 12px 15px;
           font-size: 0.95rem;
           font-family: 'Inter', sans-serif;
@@ -174,7 +170,7 @@
       }
 
       .filter-toggle-button {
-          width: 45px; /* Square button */
+          width: 45px;
           height: 45px;
           background: #0f0f0f;
           border: 1px solid #444444;
@@ -206,7 +202,7 @@
       }
 
       .filter-options {
-          display: none; /* Hidden by default, toggled by JS */
+          display: none;
           flex-direction: column;
           gap: 15px;
           padding-top: 10px;
@@ -240,7 +236,7 @@
           font-size: 0.9rem;
           outline: none;
           cursor: pointer;
-          appearance: none; /* Remove default arrow */
+          appearance: none;
           background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2C114.7L159.3%2C7.7c-3.1-3.1-8.2-3.1-11.3%2C0c-1.6%2C1.6-2.4%2C3.6-2.4%2C5.7v271.9c0%2C4.1%2C3.3%2C7.4%2C7.4%2C7.4c2.1%2C0%2C4.1-0.8%2C5.7-2.4l127.7-107c3.1-3.1%2C3.1-8.2%2C0-11.3C290.1%2C117.8%2C290.1%2C117.8%2C287%2C114.7z%22%2F%3E%3C%2Fsvg%3E');
           background-repeat: no-repeat;
           background-position: right 8px top 50%;
@@ -278,7 +274,6 @@
           transform: translate(-50%, -50%);
       }
 
-      /* Accounts Grid */
       .accounts-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -317,20 +312,6 @@
           align-items: center;
       }
 
-      /* Removed from card, now in modal */
-      /* .account-description {
-          font-family: 'Inter', sans-serif;
-          color: #b0b0b0;
-          font-size: 0.9rem;
-          line-height: 1.5;
-          margin-bottom: 15px;
-          height: 60px;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-      } */
-
       .seller-info {
           display: flex;
           align-items: center;
@@ -360,7 +341,7 @@
 
       .account-stats {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjusted for more columns */
+          grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
           gap: 8px;
           margin-bottom: 15px;
       }
@@ -404,28 +385,8 @@
           text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
       }
 
-      /* Removed from card */
-      /* .instant-delivery {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          color: #999999;
-          font-family: 'Inter', sans-serif;
-          font-size: 0.8rem;
-          font-weight: 600;
-          text-transform: uppercase;
-      }
-
-      .instant-icon {
-          width: 12px;
-          height: 12px;
-          background: #666666;
-          border-radius: 50%;
-      } */
-
-      /* Modal Styles */
       .modal {
-          display: none; /* Hidden by default, will be set to 'block' by JS */
+          display: none;
           position: fixed;
           z-index: 1000;
           left: 0;
@@ -440,20 +401,17 @@
           background: #1a1a1a;
           border: 1px solid #444444;
           border-radius: 12px;
-          /* Centering using absolute positioning and transform */
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-
-          /* Adjusted for near full-page coverage */
-          width: 98vw; /* Use viewport width */
-          max-width: 1200px; /* Set a reasonable max-width for very large screens */
-          height: 98vh; /* Use viewport height */
-          max-height: 900px; /* Set a reasonable max-height */
+          width: 98vw;
+          max-width: 1200px;
+          height: 98vh;
+          max-height: 900px;
           overflow-y: auto;
           box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-          margin: 0; /* Remove margin as transform handles centering */
+          margin: 0;
       }
 
       .modal-header {
@@ -496,13 +454,26 @@
           color: #b0b0b0;
           font-size: 1rem;
           line-height: 1.6;
-          margin-bottom: 25px;
+          margin-bottom: 10px;
+      }
+
+      .discord-link {
+          display: block;
+          margin-top: 15px;
+          font-size: 0.95rem;
+          color: #8888ff;
+          text-decoration: underline;
+          font-weight: 500;
+      }
+      .discord-link:hover {
+          color: #ffffff;
       }
 
       .account-details-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
           gap: 12px;
+          margin-top: 25px;
           margin-bottom: 25px;
       }
 
@@ -542,27 +513,59 @@
           text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
       }
 
-      .image-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-          gap: 12px;
-      }
-
-      .gallery-image {
+      .carousel-container {
+          position: relative;
           width: 100%;
-          height: 120px;
-          object-fit: cover;
-          border: 1px solid #444444;
+          max-width: 800px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #0f0f0f;
+          border: 1px solid #222222;
           border-radius: 8px;
-          transition: all 0.2s ease;
-          cursor: pointer;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          overflow: hidden;
       }
 
-      .gallery-image:hover {
-          border-color: #888888;
-          transform: scale(1.03);
-          box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      .main-gallery-image {
+          width: 100%;
+          height: auto;
+          max-height: 450px;
+          object-fit: contain;
+          display: block;
+          transition: opacity 0.3s ease-in-out;
+      }
+
+      .carousel-button {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(0, 0, 0, 0.6);
+          color: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 1.5rem;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.2s ease, border-color 0.2s ease;
+          z-index: 10;
+      }
+
+      .carousel-button:hover {
+          background: rgba(0, 0, 0, 0.8);
+          border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .carousel-button.prev-button {
+          left: 10px;
+      }
+
+      .carousel-button.next-button {
+          right: 10px;
       }
 
       .no-results {
@@ -573,10 +576,9 @@
           font-family: 'Inter', sans-serif;
       }
 
-      /* Responsive */
       @media (max-width: 768px) {
           header {
-              grid-template-columns: 1fr; /* Stack items on small screens */
+              grid-template-columns: 1fr;
               gap: 20px;
               padding-bottom: 10px;
           }
@@ -597,9 +599,8 @@
               grid-template-columns: 1fr;
           }
           .modal-content {
-              width: 95vw; /* Adjusted for mobile */
-              height: 95vh; /* Adjusted for mobile */
-              /* No margin needed here, absolute positioning handles it */
+              width: 95vw;
+              height: 95vh;
           }
           .modal-header, .modal-body {
               padding: 15px;
@@ -607,9 +608,11 @@
           .account-details-grid {
               grid-template-columns: repeat(2, 1fr);
           }
+          .main-gallery-image {
+              max-height: 300px;
+          }
       }
 
-      /* Scrollbar styling */
       ::-webkit-scrollbar {
           width: 10px;
       }
@@ -648,12 +651,11 @@
       <img src="Media/favicon.png" alt="NS Logo">
       <h1>Nebula Services</h1>
   </div>
-  <div></div> <!-- Empty div to balance flexbox layout -->
+  <div></div>
 </header>
 
 <main>
   <div class="container">
-      <!-- Dynamic Search and Filter Panel -->
       <section class="search-filter-panel" id="searchFilterPanel">
           <div class="search-input-wrapper">
               <input type="text" class="search-input" id="dynamicSearchInput" placeholder="Search by title or description...">
@@ -680,7 +682,6 @@
 
       <section class="accounts-section">
           <div class="accounts-grid" id="accountsGrid">
-              <!-- Accounts will be dynamically added here -->
           </div>
           <div class="no-results" id="noResults" style="display: none;">
               <h3>No Accounts Found.</h3>
@@ -690,7 +691,6 @@
   </div>
 </main>
 
-<!-- Modal -->
 <div id="accountModal" class="modal">
   <div class="modal-content">
       <div class="modal-header">
@@ -699,22 +699,28 @@
       </div>
       <div class="modal-body">
           <p class="modal-description" id="modalDescription"></p>
+          <br>
+          <a href="https://discord.gg/unKSGxun7u" target="_blank" class="discord-link">Join our Discord Server for purchases!</a>
+          <br> <!-- Added blank line here -->
           <div class="account-details-grid" id="modalDetails"></div>
           <div class="image-gallery">
               <h3 class="gallery-title">Visual Assets</h3>
-              <div class="image-grid" id="imageGallery"></div>
+              <div class="carousel-container">
+                  <button class="carousel-button prev-button" id="prevImage">&lt;</button>
+                  <img id="mainGalleryImage" src="/placeholder.svg" alt="Account Screenshot" class="main-gallery-image">
+                  <button class="carousel-button next-button" id="nextImage">&gt;</button>
+              </div>
           </div>
       </div>
   </div>
 </div>
 
 <script>
-  // ACCOUNT DATA
   const accounts = [
       {
           id: 1,
           title: "2 skins | Blue Team Leader | Blue Streak | Wingman | Bogey Bag | Clawz Retro | 600 VB",
-          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ❌\n🌐 Country: AU\n🔒 2FA Enabled: ❌\n\nhttps://discord.gg/unKSGxun7u",
+          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ❌\n🌐 Country: AU\n🔒 2FA Enabled: ❌",
           seller: "distress",
           price: 7,
           level: 26,
@@ -739,8 +745,8 @@
       },
       {
           id: 2,
-          title: "8 skins | Hot Marat | Fresh | Calamity | Drift | DJ Yonder",
-          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ❌\n🌐 Country: DE\n🔒 2FA Enabled: ❌\n\nhttps://discord.gg/unKSGxun7u",
+          title: "8 skins | Hot Marat | Fresh | Calamity | Drift | DJ Yonder | 0 VB",
+          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ❌\n🌐 Country: DE\n🔒 2FA Enabled: ❌",
           seller: "distress",
           price: 20,
           level: 68,
@@ -766,7 +772,7 @@
       {
           id: 3,
           title: "185 skins | Gold Midas | Gold Meowscles | Gold Brutus | Major Glory | Reaper | 3300 VB",
-          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ✅(Can Be Removed)\n🌐 Country: US\n🔒 2FA Enabled: ✅(Can Be Removed)\n\nhttps://discord.gg/unKSGxun7u",
+          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ✅(Can Be Removed)\n🌐 Country: US\n🔒 2FA Enabled: ✅(Can Be Removed)",
           seller: "distress",
           price: 40,
           level: 2770,
@@ -788,11 +794,11 @@
               "exclusives.png"
           ],
           tags: ["stacked", "rare"]
-      }, // Added missing comma here
+      },
       {
           id: 4,
-          title: "01 skins | Fresh | Rambunctious | Rogue Agent | Spike | Rust Bucket | 1250 VB",
-          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ❌\n🌐 Country: DE\n🔒 2FA Enabled: ❌\n\nhttps://discord.gg/unKSGxun7u",
+          title: "101 skins | Fresh | Rambunctious | Rogue Agent | Spike | Rust Bucket | 1250 VB",
+          description: "✅ Full Access\n📧 Email Login\n👪 Parental Control: ❌\n🌐 Country: DE\n🔒 2FA Enabled: ❌",
           seller: "distress",
           price: 45,
           level: 1133,
@@ -818,8 +824,9 @@
   ];
 
   let filteredAccounts = [...accounts];
+  let currentAccountImages = [];
+  let currentImageIndex = 0;
 
-  // Get elements
   const searchToggleButton = document.getElementById('searchToggleButton');
   const searchFilterPanel = document.getElementById('searchFilterPanel');
   const dynamicSearchInput = document.getElementById('dynamicSearchInput');
@@ -828,11 +835,9 @@
   const sortOrderSelect = document.getElementById('sortOrder');
   const tagFilterCheckboxes = document.querySelectorAll('.tag-filter');
 
-  // Initialize the page
   document.addEventListener('DOMContentLoaded', function() {
       displayAccounts();
       
-      // Event Listeners for search and filters
       searchToggleButton.addEventListener('click', toggleSearchPanel);
       filterToggleButton.addEventListener('click', toggleFilterOptions);
       dynamicSearchInput.addEventListener('input', searchAccounts);
@@ -841,36 +846,39 @@
           checkbox.addEventListener('change', searchAccounts);
       });
 
-      // Modal functionality
       const modal = document.getElementById('accountModal');
       const closeBtn = document.querySelector('.close');
+      const prevImageBtn = document.getElementById('prevImage');
+      const nextImageBtn = document.getElementById('nextImage');
       
       closeBtn.onclick = function() {
           modal.style.display = 'none';
       }
       
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = 'none';
-          }
-      }
+      // Removed window.onclick to prevent closing when clicking outside the 'X' button
+      // window.onclick = function(event) {
+      //     if (event.target == modal) {
+      //         modal.style.display = 'none';
+      //     }
+      // }
+
+      prevImageBtn.addEventListener('click', showPreviousImage);
+      nextImageBtn.addEventListener('click', showNextImage);
   });
 
-  // Toggle Search Panel
   function toggleSearchPanel() {
       const isActive = searchFilterPanel.classList.toggle('active');
       searchToggleButton.classList.toggle('active');
 
       if (isActive) {
-          filterToggleButton.style.display = 'flex'; // Show the 3-dots button
+          filterToggleButton.style.display = 'flex';
       } else {
-          filterToggleButton.style.display = 'none'; // Hide the 3-dots button
-          filterOptions.style.display = 'none'; // Also hide filter options if closing panel
-          filterOptions.classList.remove('active'); // Remove active class
+          filterToggleButton.style.display = 'none';
+          filterOptions.style.display = 'none';
+          filterOptions.classList.remove('active');
       }
   }
 
-  // Toggle Filter Options (3 dots button)
   function toggleFilterOptions() {
       filterOptions.classList.toggle('active');
       if (filterOptions.classList.contains('active')) {
@@ -880,7 +888,6 @@
       }
   }
 
-  // Display accounts
   function displayAccounts() {
       const grid = document.getElementById('accountsGrid');
       const noResults = document.getElementById('noResults');
@@ -927,7 +934,6 @@
       `).join('');
   }
 
-  // Search and Filter accounts
   function searchAccounts() {
       const searchTerm = dynamicSearchInput.value.toLowerCase().trim();
       const sortOrder = sortOrderSelect.value;
@@ -937,7 +943,6 @@
 
       let tempAccounts = [...accounts];
 
-      // Apply search filter
       if (searchTerm !== '') {
           tempAccounts = tempAccounts.filter(account => 
               account.title.toLowerCase().includes(searchTerm) || 
@@ -945,26 +950,22 @@
           );
       }
 
-      // Apply tag filters
       if (selectedTags.length > 0) {
           tempAccounts = tempAccounts.filter(account => 
               selectedTags.every(tag => account.tags && account.tags.includes(tag))
           );
       }
 
-      // Apply sorting
       if (sortOrder === 'price-asc') {
           tempAccounts.sort((a, b) => a.price - b.price);
       } else if (sortOrder === 'price-desc') {
           tempAccounts.sort((a, b) => b.price - a.price);
       }
-      // 'default' or no selection means no specific sort is applied beyond initial order
 
       filteredAccounts = tempAccounts;
       displayAccounts();
   }
 
-  // Open modal with account details
   function openModal(accountId) {
       const account = accounts.find(acc => acc.id === accountId);
       if (!account) return;
@@ -973,11 +974,15 @@
       const modalTitle = document.getElementById('modalTitle');
       const modalDescription = document.getElementById('modalDescription');
       const modalDetails = document.getElementById('modalDetails');
+      const mainGalleryImage = document.getElementById('mainGalleryImage');
       const imageGalleryContainer = document.querySelector('.image-gallery');
-      const imageGalleryGrid = document.getElementById('imageGallery');
+      const prevImageBtn = document.getElementById('prevImage');
+      const nextImageBtn = document.getElementById('nextImage');
 
       modalTitle.textContent = account.title;
-      modalDescription.innerHTML = account.description.replace(/\n/g, '<br>');
+      
+      const descriptionWithLinks = account.description.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color: #8888ff; text-decoration: underline;">$1</a>');
+      modalDescription.innerHTML = descriptionWithLinks.replace(/\n/g, '<br>');
 
       modalDetails.innerHTML = `
           <div class="detail-card">
@@ -1034,15 +1039,51 @@
           </div>
       `;
 
-      const imagePaths = account.imageNames.map(imageName => `${account.folder}/${imageName}`);
-      
-      imageGalleryContainer.style.display = 'block'; 
+      currentAccountImages = account.imageNames.map(imageName => `${account.folder}/${imageName}`);
+      currentImageIndex = 0;
 
-      imageGalleryGrid.innerHTML = imagePaths.map(imagePath => `
-          <img src="${imagePath}" alt="Account Screenshot" class="gallery-image" onclick="window.open('${imagePath}', '_blank')" onerror="this.remove()">
-      `).join('');
+      if (currentAccountImages.length > 0) {
+          imageGalleryContainer.style.display = 'block';
+          updateCarouselImage();
+          prevImageBtn.style.display = currentAccountImages.length > 1 ? 'flex' : 'none';
+          nextImageBtn.style.display = currentAccountImages.length > 1 ? 'flex' : 'none';
+      } else {
+          imageGalleryContainer.style.display = 'none';
+      }
 
-      modal.style.display = 'block'; // This will now correctly show the modal
+      modal.style.display = 'block';
+  }
+
+  function updateCarouselImage() {
+      const mainGalleryImage = document.getElementById('mainGalleryImage');
+      if (currentAccountImages.length > 0) {
+          mainGalleryImage.src = currentAccountImages[currentImageIndex];
+          mainGalleryImage.onerror = function() {
+              this.remove();
+              if (currentAccountImages.length > 1) {
+                  currentAccountImages.splice(currentImageIndex, 1);
+                  if (currentImageIndex >= currentAccountImages.length) {
+                      currentImageIndex = 0;
+                  }
+                  updateCarouselImage();
+              } else {
+                  document.querySelector('.image-gallery').style.display = 'none';
+              }
+          };
+      } else {
+          mainGalleryImage.src = '';
+          document.querySelector('.image-gallery').style.display = 'none';
+      }
+  }
+
+  function showPreviousImage() {
+      currentImageIndex = (currentImageIndex - 1 + currentAccountImages.length) % currentAccountImages.length;
+      updateCarouselImage();
+  }
+
+  function showNextImage() {
+      currentImageIndex = (currentImageIndex + 1) % currentAccountImages.length;
+      updateCarouselImage();
   }
 </script>
 </body>
