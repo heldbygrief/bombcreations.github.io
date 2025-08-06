@@ -440,11 +440,11 @@
             background: #1a1a1a;
             border: 1px solid #444444;
             border-radius: 12px;
-            margin: 2% auto;
-            padding: 0;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
+            /* Adjusted for full-page coverage */
+            margin: 2.5vh auto; /* Small margin from top/bottom */
+            width: 95%; /* Wider */
+            max-width: 1000px; /* Increased max-width */
+            max-height: 95vh; /* Taller */
             overflow-y: auto;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
         }
@@ -712,7 +712,7 @@
             level: 250,
             vbucks: 3000,
             skins: 85,
-            folder: "Media/Accounts/Account 1", // Corrected path
+            folder: "Media/Accounts/Account 1",
             imageNames: [
                 "skins.png",
                 "pickaxes.png",
@@ -730,7 +730,7 @@
             level: 180,
             vbucks: 1500,
             skins: 60,
-            folder: "Media/Accounts/Account 2", // Corrected path
+            folder: "Media/Accounts/Account 2",
             imageNames: [
                 "skins.png",
                 "pickaxes.png",
@@ -748,7 +748,7 @@
             level: 300,
             vbucks: 4000,
             skins: 150,
-            folder: "Media/Accounts/Account 3", // Corrected path
+            folder: "Media/Accounts/Account 3",
             imageNames: [
                 "skins.png",
                 "pickaxes.png",
@@ -915,8 +915,8 @@
         const modalTitle = document.getElementById('modalTitle');
         const modalDescription = document.getElementById('modalDescription');
         const modalDetails = document.getElementById('modalDetails');
-        const imageGalleryContainer = document.querySelector('.image-gallery'); // Get the container
-        const imageGalleryGrid = document.getElementById('imageGallery'); // Get the grid inside
+        const imageGalleryContainer = document.querySelector('.image-gallery');
+        const imageGalleryGrid = document.getElementById('imageGallery');
 
         modalTitle.textContent = account.title;
         modalDescription.textContent = account.description;
@@ -944,13 +944,10 @@
             </div>
         `;
 
-        // Generate image paths using the new folder structure and fixed names
         const imagePaths = account.imageNames.map(imageName => `${account.folder}/${imageName}`);
         
-        // Always show the image gallery container
         imageGalleryContainer.style.display = 'block'; 
 
-        // Populate the image grid, removing elements that fail to load
         imageGalleryGrid.innerHTML = imagePaths.map(imagePath => `
             <img src="${imagePath}" alt="Account Screenshot" class="gallery-image" onclick="window.open('${imagePath}', '_blank')" onerror="this.remove()">
         `).join('');
