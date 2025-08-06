@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebula Services</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Nebula Services - Modern Accounts</title>
+    <link rel="icon" type="image/png" href="Media/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Global Reset & Base Styles */
@@ -637,7 +637,7 @@
         </a>
     </div>
     <div class="logo-container">
-        <img src="favicon.png" alt="NS Logo">
+        <img src="Media/favicon.png" alt="NS Logo">
         <h1>Nebula Services</h1>
     </div>
     <div></div> <!-- Empty div to balance flexbox layout -->
@@ -712,12 +712,12 @@
             level: 250,
             vbucks: 3000,
             skins: 85,
-            folder: "accounts/account-1",
+            folder: "Media/Accounts/Account #1", // Updated path
             imageNames: [
-                "locker-view.jpg",
-                "skins-collection.jpg", 
-                "rare-items.jpg",
-                "battle-pass.jpg"
+                "skins.png",
+                "pickaxes.png",
+                "emotes.png",
+                "exclusives.png"
             ],
             tags: ["stacked", "rare"]
         },
@@ -730,12 +730,12 @@
             level: 180,
             vbucks: 1500,
             skins: 60,
-            folder: "accounts/account-2",
+            folder: "Media/Accounts/Account #2", // Updated path
             imageNames: [
-                "galaxy-skin.jpg",
-                "founders-pack.jpg",
-                "exclusive-items.jpg",
-                "account-level.jpg"
+                "skins.png",
+                "pickaxes.png",
+                "emotes.png",
+                "exclusives.png"
             ],
             tags: ["og", "rare"]
         },
@@ -748,12 +748,12 @@
             level: 300,
             vbucks: 4000,
             skins: 150,
-            folder: "accounts/account-3",
+            folder: "Media/Accounts/Account #3", // Updated path
             imageNames: [
-                "reaper-axe.jpg",
-                "point-patroller.jpg",
-                "91-skins.jpg",
-                "vbucks-balance.jpg"
+                "skins.png",
+                "pickaxes.png",
+                "emotes.png",
+                "exclusives.png"
             ],
             tags: ["stacked"]
         }
@@ -913,12 +913,12 @@
 
         const modal = document.getElementById('accountModal');
         const modalTitle = document.getElementById('modalTitle');
-        const modalDescription = document.getElementById('modalDescription'); // New element
+        const modalDescription = document.getElementById('modalDescription');
         const modalDetails = document.getElementById('modalDetails');
         const imageGallery = document.getElementById('imageGallery');
 
         modalTitle.textContent = account.title;
-        modalDescription.textContent = account.description; // Set description
+        modalDescription.textContent = account.description;
 
         modalDetails.innerHTML = `
             <div class="detail-card">
@@ -942,9 +942,8 @@
                 <div class="detail-value">$${account.price.toFixed(2)}</div>
             </div>
         `;
-        // Removed the "Status" detail card
 
-        // Generate image paths using the folder structure
+        // Generate image paths using the new folder structure and fixed names
         const imagePaths = account.imageNames.map(imageName => `${account.folder}/${imageName}`);
         
         imageGallery.innerHTML = imagePaths.map(imagePath => `
