@@ -360,7 +360,7 @@
 
         .account-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjusted for more columns */
             gap: 8px;
             margin-bottom: 15px;
         }
@@ -375,8 +375,8 @@
 
         .stat-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
             color: #999999;
+            font-size: 0.75rem;
             margin-bottom: 3px;
             text-transform: uppercase;
         }
@@ -425,7 +425,7 @@
 
         /* Modal Styles */
         .modal {
-            display: none;
+            display: none; /* Hidden by default, will be set to 'block' by JS */
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -440,13 +440,20 @@
             background: #1a1a1a;
             border: 1px solid #444444;
             border-radius: 12px;
-            /* Adjusted for full-page coverage */
-            margin: 2.5vh auto; /* Small margin from top/bottom */
-            width: 95%; /* Wider */
-            max-width: 1000px; /* Increased max-width */
-            max-height: 95vh; /* Taller */
+            /* Centering using absolute positioning and transform */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            /* Adjusted for near full-page coverage */
+            width: 98vw; /* Use viewport width */
+            max-width: 1200px; /* Set a reasonable max-width for very large screens */
+            height: 98vh; /* Use viewport height */
+            max-height: 900px; /* Set a reasonable max-height */
             overflow-y: auto;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+            margin: 0; /* Remove margin as transform handles centering */
         }
 
         .modal-header {
@@ -590,13 +597,14 @@
                 grid-template-columns: 1fr;
             }
             .modal-content {
-                width: 95%;
-                margin: 5% auto;
+                width: 95vw; /* Adjusted for mobile */
+                height: 95vh; /* Adjusted for mobile */
+                /* No margin needed here, absolute positioning handles it */
             }
             .modal-header, .modal-body {
                 padding: 15px;
             }
-            .account-stats {
+            .account-details-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -712,6 +720,14 @@
             level: 250,
             vbucks: 3000,
             skins: 85,
+            backpacks: 70,
+            pickaxes: 50,
+            dances: 120,
+            gliders: 40,
+            wraps: 60,
+            banners: 150,
+            sprays: 100,
+            exclusives: 5,
             folder: "Media/Accounts/Account 1",
             imageNames: [
                 "skins.png",
@@ -730,6 +746,14 @@
             level: 180,
             vbucks: 1500,
             skins: 60,
+            backpacks: 45,
+            pickaxes: 30,
+            dances: 80,
+            gliders: 25,
+            wraps: 35,
+            banners: 100,
+            sprays: 70,
+            exclusives: 3,
             folder: "Media/Accounts/Account 2",
             imageNames: [
                 "skins.png",
@@ -748,6 +772,14 @@
             level: 300,
             vbucks: 4000,
             skins: 150,
+            backpacks: 100,
+            pickaxes: 70,
+            dances: 200,
+            gliders: 60,
+            wraps: 90,
+            banners: 250,
+            sprays: 180,
+            exclusives: 8,
             folder: "Media/Accounts/Account 3",
             imageNames: [
                 "skins.png",
@@ -939,6 +971,38 @@
                 <div class="detail-value">${account.skins}</div>
             </div>
             <div class="detail-card">
+                <div class="detail-label">Backpacks</div>
+                <div class="detail-value">${account.backpacks}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Pickaxes</div>
+                <div class="detail-value">${account.pickaxes}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Dances</div>
+                <div class="detail-value">${account.dances}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Gliders</div>
+                <div class="detail-value">${account.gliders}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Wraps</div>
+                <div class="detail-value">${account.wraps}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Banners</div>
+                <div class="detail-value">${account.banners}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Sprays</div>
+                <div class="detail-value">${account.sprays}</div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-label">Exclusives</div>
+                <div class="detail-value">${account.exclusives}</div>
+            </div>
+            <div class="detail-card">
                 <div class="detail-label">Price</div>
                 <div class="detail-value">$${account.price.toFixed(2)}</div>
             </div>
@@ -952,7 +1016,7 @@
             <img src="${imagePath}" alt="Account Screenshot" class="gallery-image" onclick="window.open('${imagePath}', '_blank')" onerror="this.remove()">
         `).join('');
 
-        modal.style.display = 'block';
+        modal.style.display = 'block'; // This will now correctly show the modal
     }
 </script>
 </body>
