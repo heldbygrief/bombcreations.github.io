@@ -712,7 +712,7 @@
             level: 250,
             vbucks: 3000,
             skins: 85,
-            folder: "Media/Accounts/Account #1", // Updated path
+            folder: "Media/Accounts/Account #1",
             imageNames: [
                 "skins.png",
                 "pickaxes.png",
@@ -730,7 +730,7 @@
             level: 180,
             vbucks: 1500,
             skins: 60,
-            folder: "Media/Accounts/Account #2", // Updated path
+            folder: "Media/Accounts/Account #2",
             imageNames: [
                 "skins.png",
                 "pickaxes.png",
@@ -748,7 +748,7 @@
             level: 300,
             vbucks: 4000,
             skins: 150,
-            folder: "Media/Accounts/Account #3", // Updated path
+            folder: "Media/Accounts/Account #3",
             imageNames: [
                 "skins.png",
                 "pickaxes.png",
@@ -947,7 +947,7 @@
         const imagePaths = account.imageNames.map(imageName => `${account.folder}/${imageName}`);
         
         imageGallery.innerHTML = imagePaths.map(imagePath => `
-            <img src="${imagePath}" alt="Account Screenshot" class="gallery-image" onclick="window.open('${imagePath}', '_blank')" onerror="this.src='/placeholder.svg?height=150&width=200&text=IMAGE+NOT+FOUND'">
+            <img src="${imagePath}" alt="Account Screenshot" class="gallery-image" onclick="window.open('${imagePath}', '_blank')" onerror="this.remove()">
         `).join('');
 
         modal.style.display = 'block';
